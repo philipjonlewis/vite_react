@@ -11,18 +11,21 @@ import {
   Second,
   Users,
   UserDetails,
+  Profile,
 } from "./pages";
+
+import { AuthProvider } from "./utils/auth";
 
 //This is how you lazy load
 const LazyAbout = React.lazy(() => import("./pages/About"));
 
-import { Navbar } from "./components";
+import { LogIn, Navbar, RequireAuth } from "./components";
 
 import { Routes, Route } from "react-router-dom";
 
 const App = () => {
   return (
-    <div>
+    <AuthProvider>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -30,6 +33,7 @@ const App = () => {
           path="about"
           element={
             // Must be nababalutan nitong react suspense ang mga lazy components
+            // Use lazy components for heavy components
             <React.Suspense fallback={<ErrorPage />}>
               <LazyAbout />
             </React.Suspense>
@@ -45,8 +49,20 @@ const App = () => {
         <Route path="users" element={<Users />} />
         <Route path="users/:userId" element={<UserDetails />} />
         <Route path="*" element={<ErrorPage />} />
+
+        <Route path="login" element={<LogIn />} />
+        {/* Make an authenticated component */}
+
+        <Route
+          path="profile"
+          element={
+            <RequireAuth>
+              <Profile />
+            </RequireAuth>
+          }
+        />
       </Routes>
-    </div>
+    </AuthProvider>
   );
 };
 

@@ -8,6 +8,7 @@ import First from "./First";
 import Second from "./Second";
 import Users from "./Users";
 import UserDetails from "./UserDetails";
+import Profile from "./Profile";
 
 export {
   Home,
@@ -20,4 +21,5 @@ export {
   Second,
   Users,
   UserDetails,
+  Profile,
 };
