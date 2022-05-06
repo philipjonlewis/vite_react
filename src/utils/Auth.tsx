@@ -1,16 +1,32 @@
 import React, { useState, createContext, useContext } from "react";
 
-const AuthContext = createContext(null);
+const userState = {
+  username: "",
+  // password: "",
+};
 
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+type userStateType = {
+  username: string;
+  // password: string;
+};
 
-  const login = (user: React.SetStateAction<null>) => {
-    setUser(user);
+const AuthContext = createContext({});
+
+export const AuthProvider = ({ children }: RequireAuthProps) => {
+  const [user, setUser] = useState(userState);
+
+  const login = (username: string) => {
+    // console.log(user);
+    setUser(() => {
+      return { ...user, username };
+    });
   };
 
   const logout = () => {
-    setUser(null);
+    // console.log(user);
+    setUser(() => {
+      return { username: "", password: "" };
+    });
   };
 
   return (
@@ -21,5 +37,5 @@ export const AuthProvider = ({ children }) => {
 };
 
 export const useAuth = () => {
-  return useContext(AuthContext);
+  return useContext(AuthContext) as any;
 };

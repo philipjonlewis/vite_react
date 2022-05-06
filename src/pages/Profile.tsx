@@ -1,13 +1,13 @@
 import React from "react";
-import { useAuth } from "../utils/auth";
-import { useNavigate } from "react-router-dom";
+import { useAuth } from "../utils/Auth";
+import { Navigate } from "react-router-dom";
 
 const Profile = () => {
   const auth = useAuth();
-
+  console.log(auth.user.username);
   const handleLogOut = () => {
     auth.logout();
-    useNavigate("/");
+    return <Navigate to="/" />;
   };
 
   return (
