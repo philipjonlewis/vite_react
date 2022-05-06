@@ -29,46 +29,48 @@ const App = () => {
 
   return (
     <>
-      <AuthProvider>
-        <Navbar />
-        <AnimatePresence exitBeforeEnter>
-          <Routes location={location} key={location.key}>
-            <Route path="/" element={<Home />} />
-            <Route
-              path="about"
-              element={
-                // Must be nababalutan nitong react suspense ang mga lazy components
-                // Use lazy components for heavy components
-                <React.Suspense fallback={<ErrorPage />}>
-                  <LazyAbout />
-                </React.Suspense>
-              }
-            />
-            <Route path="contact" element={<Contact />} />
-            <Route path="products" element={<Products />}>
-              {/* This index is the one that will be shown first */}
-              <Route index element={<First />} />
-              <Route path="first" element={<First />} />
-              <Route path="second" element={<Second />} />
-            </Route>
-            <Route path="users" element={<Users />} />
-            <Route path="users/:userId" element={<UserDetails />} />
-            <Route path="*" element={<ErrorPage />} />
+      {/* <AuthProvider> */}
+      <Navbar />
+      <AnimatePresence exitBeforeEnter>
+        <Routes location={location} key={location.key}>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="about"
+            element={
+              // Must be nababalutan nitong react suspense ang mga lazy components
+              // Use lazy components for heavy components
+              <React.Suspense fallback={<ErrorPage />}>
+                <LazyAbout />
+              </React.Suspense>
+            }
+          />
+          <Route path="contact" element={<Contact />} />
+          <Route path="products" element={<Products />}>
+            {/* This index is the one that will be shown first */}
+            <Route index element={<First />} />
+            <Route path="first" element={<First />} />
+            <Route path="second" element={<Second />} />
+          </Route>
+          <Route path="users" element={<Users />} />
+          <Route path="users/:userId" element={<UserDetails />} />
+          <Route path="*" element={<ErrorPage />} />
 
-            <Route path="login" element={<LogIn />} />
-            {/* Make an authenticated component */}
+          <Route path="login" element={<LogIn />} />
+          {/* Make an authenticated component */}
 
-            <Route
-              path="profile"
-              element={
-                <RequireAuth>
-                  <Profile />
-                </RequireAuth>
-              }
-            />
-          </Routes>
-        </AnimatePresence>
-      </AuthProvider>
+          <Route
+            path="profile"
+            element={
+              <RequireAuth>
+                <Profile />
+              </RequireAuth>
+            }
+          />
+
+          
+        </Routes>
+      </AnimatePresence>
+      {/* </AuthProvider> */}
     </>
   );
 };

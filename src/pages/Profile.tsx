@@ -1,22 +1,38 @@
 import React from "react";
-import { useAuth } from "../utils/Auth";
-import { Navigate } from "react-router-dom";
+
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+
+import { useDispatch } from "react-redux";
+
+import { logout } from "../redux/authState";
 
 const Profile = () => {
-  const auth = useAuth();
-  console.log(auth.user.username);
+  const navigate = useNavigate();
+  const { username, isAuthenticated } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
   const handleLogOut = () => {
-    auth.logout();
-    return <Navigate to="/" />;
+    dispatch(
+      logout({
+        username: "",
+        password: "",
+        isEmailVerified: "",
+        isBlocked: "",
+        isAuthenticated: false,
+      })
+    );
+
+    return navigate("/login");
   };
 
   return (
     <div>
       <div>
         <h1>Profile Page</h1>
-        <p>Welcome! {auth.user}</p>
+        <p>Welcome! {username}</p>
       </div>
-      {auth.user && <button onClick={handleLogOut}>LogOut</button>}
+      {isAuthenticated && <button onClick={handleLogOut}>LogOut</button>}
     </div>
   );
 };
