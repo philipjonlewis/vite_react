@@ -2,11 +2,10 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 import { NavLink } from "react-router-dom";
-import { useAuth } from "../utils/Auth";
 import { motion } from "framer-motion";
 
 const Navbar = () => {
-  const { isAuthenticated } = useSelector((state) => state.auth);
+  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
 
   const navStyle = "text-blue-grey";
 
@@ -27,12 +26,10 @@ const Navbar = () => {
             Products
           </NavLink>
 
-
           <NavLink className={navStyle} to={"/profile"}>
             Profile
           </NavLink>
 
-          
           {!isAuthenticated && (
             <NavLink className={navStyle} to={"/login"}>
               LogIn

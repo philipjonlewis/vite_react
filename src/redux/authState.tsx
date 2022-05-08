@@ -17,11 +17,16 @@ export const authSlice = createSlice({
       state.username = username;
       state.password = password;
       state.isAuthenticated = true;
-
-    
     },
-    logout: (state, action) => {
-      state = action.payload;
+    logout: (state) => {
+      state = {
+        username: "",
+        password: "",
+        isEmailVerified: "",
+        isBlocked: "",
+        isAuthenticated: false,
+      };
+
       console.log(state);
       <Navigate to="/" />;
     },

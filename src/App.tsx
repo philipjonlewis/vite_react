@@ -15,8 +15,6 @@ import {
   Profile,
 } from "./pages";
 
-import { AuthProvider } from "./utils/Auth";
-
 //This is how you lazy load
 const LazyAbout = React.lazy(() => import("./pages/About"));
 

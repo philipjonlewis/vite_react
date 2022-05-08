@@ -25,4 +25,9 @@ declare global {
     login: any;
     logout: any;
   };
+
+  interface RootState {
+    auth: any;
+    isOn: boolean
+  }
 }

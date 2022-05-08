@@ -9,20 +9,14 @@ import { logout } from "../redux/authState";
 
 const Profile = () => {
   const navigate = useNavigate();
-  const { username, isAuthenticated } = useSelector((state) => state.auth);
+  const { username, isAuthenticated } = useSelector(
+    (state: RootState) => state.auth
+  );
   const dispatch = useDispatch();
 
   const handleLogOut = () => {
-    dispatch(
-      logout({
-        username: "",
-        password: "",
-        isEmailVerified: "",
-        isBlocked: "",
-        isAuthenticated: false,
-      })
-    );
-
+    dispatch(logout());
+    window.location.reload();
     return navigate("/login");
   };
 
