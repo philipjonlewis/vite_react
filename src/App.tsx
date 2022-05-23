@@ -44,12 +44,14 @@ const App = () => {
             }
           />
           <Route path="contact" element={<Contact />} />
+
           <Route path="products" element={<Products />}>
             {/* This index is the one that will be shown first */}
             <Route index element={<First />} />
             <Route path="first" element={<First />} />
             <Route path="second" element={<Second />} />
           </Route>
+          
           <Route path="users" element={<Users />} />
           <Route path="users/:userId" element={<UserDetails />} />
           <Route path="*" element={<ErrorPage />} />
